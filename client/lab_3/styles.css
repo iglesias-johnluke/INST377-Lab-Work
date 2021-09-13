@@ -1,1 +1,143 @@
+.top{
+    background-color:darkcyan;
+    padding: 6px;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+  
+  
+  .menu-container {
+    color: #fff;
+    background-color: #5995DA;  /* Blue */
+    padding: 20px 0;
+    display: flex;
+    
+  }
+  
+  .menu {
+    border: 1px solid #fff;  /* For debugging */
+    width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .links {
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .database-demos{
+      margin-left: 20px;
+      margin-right: 10px;
+  }
+
+  .header-container {
+    color: #5995DA;
+    background-color: #D6E9FE;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .header {
+    width: 900px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .group-project, .my-github{
+      align-self: flex-end;
+      margin-bottom: 20px;
+  }
+
+  .photo-grid-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .photo-grid {
+    width: 900px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  }
+  
+  .photo-grid-item {
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+  }
+
+  /* order flex box attribute has all items default
+  order as 0 */
+  .first-item { 
+    order: 4;
+  }
+
+  .second-item{
+      order: 2;
+  }
+
+  .third-item{
+      order: 1;
+  }
+
+  .fourth-item{
+      order: 5;
+  }
+
+  .last-item {
+    order: 3;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footer-item {
+    border: 1px solid #fff;
+    background-color: #D6E9FE;
+    height: 200px;
+    /* flex weights items, if all items have same weight, theyll
+    be equal size */
+    flex: 1;
+  }
+  
+  .footer-one,
+.footer-three {
+  background-color: #5995DA;
+  flex: initial;
+  width: 300px;
+}
+
+/* Mobile device style*/
+@media only screen and (max-width: 400px) {
+    body {
+      background-color: #F09A9D; /* Red */
+    }
+  }
+
+  /* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    body {
+      background-color: #B2D6FF; /* Blue */
+     
+    }
+  }
