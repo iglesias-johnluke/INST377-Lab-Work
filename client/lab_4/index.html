@@ -3,8 +3,8 @@
   <head>
     <meta charset='UTF-8'/>
     <title>Some Web Page</title>
-    <!-- meta auto refresh for html page -->
-    <meta http-equiv="refresh" content="5" >
+    <!-- meta auto refresh for html page
+    <meta http-equiv="refresh" content="5" > -->
     <link rel='stylesheet' href='styles.css'/>
   </head>
   <body>
@@ -33,8 +33,11 @@
     
     <div class='photo-grid-container'>
         <div class='photo-grid'>
+            <div class="carousel__actions">
+                <button id="carousel__button--prev" aria-label="Previous slide">Previous</button>
+            </div>
             <div class="carousel">
-                <div class='photo-grid-item first-item carousel__item'>
+                <div class='photo-grid-item first-item carousel__item carousel__item--visible'>
                     <img src='images/one.svg'/>
                 </div>
                 <div class='photo-grid-item second-item carousel__item' >
@@ -50,20 +53,21 @@
                     <img src='images/five.svg'/>
                 </div>
             </div>
+            <div class="carousel__actions">
+                <button id="carousel__button--next" aria-label="Next slide">Next</button>
+            </div>
+
           
       </div>
     </div>
-    <div class="carousel__actions">
-        <button id="carousel__button--prev" aria-label="Previous slide">Previous</button>
-        <button id="carousel__button--next" aria-label="Next slide">Next</button>
-    </div>
+    
     <div class='footer'>
         <div class='footer-item footer-one'><strong> Footer Item 1</strong> </div>
         <div class='footer-item footer-two'><strong> Footer Item 2</div>
         <div class='footer-item footer-three'><strong> Footer Item 3</div>
       </div>
 
-       
+    <script src="script.js"></script>
   </body>
 </html>
 
