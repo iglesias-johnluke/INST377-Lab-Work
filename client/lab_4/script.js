@@ -1,16 +1,17 @@
 let slidePosition = 0; //index of current viewed slide
-const slides = document.getElementsByClassName('carousel__item');
+const slides = document.querySelectorAll('div.carousel__item');
 const totalSlides = slides.length;
 
+
 document.
-  getElementById('carousel__button--next')
+    querySelector('#carousel__button--next')
   .addEventListener("click", function() { //onclick move to next slide
     document.getElementById('carousel__button--prev').style.backgroundColor = "#D3D3D3"
     document.getElementById('carousel__button--next').style.backgroundColor = "orange"
     moveToNextSlide();
   });
 document.
-  getElementById('carousel__button--prev')
+    querySelector('#carousel__button--prev')
   .addEventListener("click", function() {
     document.getElementById('carousel__button--next').style.backgroundColor = "#D3D3D3"
     document.getElementById('carousel__button--prev').style.backgroundColor = "orange"
