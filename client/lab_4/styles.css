@@ -171,17 +171,18 @@ body{
     height: 40px;
   }
   
-  .carousel .carousel__actions button#carousel__button--prev {
+   button{
     width: 60px;
     border-radius: 10px;
+    font-weight: bold;
     
     
+  }
+  button#carousel__button--prev {
+    width: 80px;
+    border-radius: 10px;
   }
   
-  .carousel .carousel__actions button#carousel__button--next {
-    width: 60px;
-    border-radius: 10px;
-  }
   
   @keyframes fadeVisibility {
     0% {
