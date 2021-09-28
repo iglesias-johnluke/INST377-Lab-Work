@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+    <head>
+        <meta charset='UTF-8'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta http-equiv="refresh" content="5" > -->
+        <title>Some Web Page</title>
+        <!-- link styles to bulma -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel='stylesheet' href='styles.css'/>
+    </head>
+    <body>
+        <div class="block">
+            <p class="header">John's Lab 5</p>
+        </div>
+        
+        <div class="columns is-centered" >
+            <form class="column left is-narrow" action="/api" method="GET">
+                <div class="block">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input" type="text" >
+                    </div>
+                <div class="block">
+                    <label class="label">Food Preference</label>
+                    <div class="control">
+                        <input class="input" type="text" >
+                    </div>
+                </div>
+                </div>
+                <div class="block">
+                    <div class="field">
+                       <label class="label">
+                           Veggie or Vegan?
+                       </label> 
+                        <div class="control">
+                          <label class="radio">
+                            Yes
+                            <input type="radio" name="question">
+                          </label>
+                          <label class="radio">
+                            No
+                            <input type="radio" name="question">
+                          </label>
+                        </div>
+                      </div>
+                </div>
+                <button class="button is-primary">Submit</button>
+            </form>
+            <div class="column right is-narrow">
+                <p>This is going to be something in 2 weeks</p>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+
+</html>

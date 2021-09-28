@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’,
+    ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
+  background-color: darkslategray;
+ 
+}
+
+/* Page Layout */
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.columns .column{
+  margin-bottom: 80px;
+}
+
+.wrapper {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  background-color: blue;
+}
+.container {
+  max-width: 960px;
+  margin-top: 25px;
+  
+}
+
+
+.header{
+  text-align: left;
+  
+  height: 150px;
+  background-color: yellow;
+  padding: 55px;
+  
+  margin:40px;
+  font-size: x-large;
+  
+}
+
+.left{
+  
+  background-color: white;
+}
+
+.right{
+  
+  background-color: white;
+  text-align: center;
+  margin-left: 30px;
+  
+}
+
