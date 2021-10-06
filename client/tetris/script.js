@@ -54,7 +54,11 @@ const lTetromino = [
             oTetromino, iTetromino]
 
 let currentPosition = 4;
-let current = theTetrominoes[0][0];
+let currentRotation = 0;
+
+//randomly select a tetromino and its first rotation
+let random = Math.floor(Math.random()*theTetrominoes.length)
+let current = theTetrominoes[random][0];
 
 //draw the first rotation in first tetromino
 function draw(){
@@ -63,4 +67,32 @@ function draw(){
     })
 }
 
-draw()
+// undar the tetrimino
+function undraw(){
+    current.forEach(index => {
+        squares[currentPosition + index].classList.remove('tetromino')
+    })
+}
+
+// make the tetromino move down every second
+timerId = setInterval(moveDown, 1000)
+
+//move down function
+function moveDown(){
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+}
+
+//freeze function
+function freeze(){
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))){
+        current.forEach(index => squares[currentPosition + index].classList.add('taken'));
+        random = Math.floor(Math.random() * theTetrominoes.length);
+        current = theTetrominoes[random][currentRotation];
+        currentPosition = 4;
+        draw()
+    }
+}
+
