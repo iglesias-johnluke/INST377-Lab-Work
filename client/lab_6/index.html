@@ -19,58 +19,62 @@
 
         <!-- <script src="script.js"></script> -->
         <script >
-            const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-            const data = []; // array of results from our fetch
+            async function windowActions() {
+                const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
+                data = [];
 
-            /* fetch all json data in url, push json to results array,
-            results is an array of maps, each index holds map for a 
-            respective inspection */
-            fetch(url)
-            .then((response) => response.json())
-            // eslint-disable-next-line max-len
-            .then((json) => data.push(...json)); // ... spreads every json entry into results array so entire json is not at results[0]
-            console.log(data);
+                 /* fetch all json data in url, push json to results array,
+                results is an array of maps, each index holds map for a 
+                respective inspection */
+                var request = await fetch(url);
+                if(request.ok){
+                    data = await request.json();
+                   
+                }
 
-            /* returns matches from results array according to 
-            wordToMatch, will search for matches according to inspection
-            entity name, category, address */
-            // eslint-disable-next-line no-shadow
-            function findMatches(wordToMatch, results) {
-            return results.filter((inspection) => { 
-                const regex = new RegExp(wordToMatch, 'gi');// wordToMatch is regex which is case insensitive
-                // return array of inspection match of either inspection city or state
-                return inspection.city.match(regex) || inspection.address_line_1.match(regex) || 
-                        inspection.zip.match(regex) || inspection.name.match(regex);
-            });
+                /* returns matches from results array according to 
+                wordToMatch, will search for matches according to inspection
+                entity name, category, address */
+                // eslint-disable-next-line no-shadow
+                function findMatches(wordToMatch, results) {
+                    return results.filter((inspection) => { 
+                        const regex = new RegExp(wordToMatch, 'gi');// wordToMatch is regex which is case insensitive
+                        // return array of inspection match of either inspection city or state
+                        return inspection.city.match(regex) || inspection.address_line_1.match(regex) || 
+                                inspection.zip.match(regex) || inspection.name.match(regex);
+                    });
+                }
+                /* display search results whenever user changes input */
+                function displayMatches(event) {
+                    /* matchArray contains matches of this.value (current
+                        user_input) within data array */
+                    const matchArray = findMatches(event.target.value, data);
+                    console.log(matchArray);
+                    const html = matchArray.map((inspection) => {//return list item elements for every index in matchArray
+                        return `
+                        <li style="font-size:25px">
+                                <span class="name">${inspection.name}<br>
+                                    ${inspection.category}<br>
+                                <em>
+                                    ${inspection.address_line_1}<br>
+                                    ${inspection.city},
+                                    <br>${inspection.zip}<br><br>
+                                </em>
+                                </span>
+                        </li>
+                        `;
+                    }).join(''); // convert array of matches to string
+                    suggestions.innerHTML = html;
+                }
+
+                const searchInput = document.querySelector('#user_input');
+                const suggestions = document.querySelector('.suggestions');// suggestions div will contain query results
+
+                // displayMatches whenever user input changes
+                searchInput.addEventListener('change', displayMatches);
             }
-            /* display search results whenever user changes input */
-            function displayMatches() {
-            /* matchArray contains matches of this.value (current
-                user_input) within data array */
-            const matchArray = findMatches(this.value, data);
-            console.log(matchArray);
-            const html = matchArray.map((inspection) => {//return list item elements for every index in matchArray
-                return `
-                  <li style="font-size:25px">
-                        <span class="name">${inspection.name}<br>
-                            ${inspection.category}<br>
-                        <em>
-                            ${inspection.address_line_1}<br>
-                            ${inspection.city},
-                            <br>${inspection.zip}<br><br>
-                        </em>
-                        </span>
-                  </li>
-                `;
-              }).join(''); // convert array of matches to string
-              suggestions.innerHTML = html;
-            }
-
-            const searchInput = document.querySelector('#user_input');
-            const suggestions = document.querySelector('.suggestions');// suggestions div will contain query results
-
-            // displayMatches whenever user input changes
-            searchInput.addEventListener('change', displayMatches);
+             window.onload = windowActions;
+            
         </script>
     </body>
 </html>
