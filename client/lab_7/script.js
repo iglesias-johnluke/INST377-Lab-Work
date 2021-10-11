@@ -1,27 +1,30 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable indent */
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
+let mymap = null;
+
 function mapInit() {
-  const mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    mymap = L.map('mapid').setView([51.505, -0.09], 13);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'your.mapbox.access.token'
+    accessToken: 'pk.eyJ1IjoiamlnbG9vIiwiYSI6ImNrdWx6Mjh0MTNuNzMycm8xdTQxODU3bG0ifQ.KSI97gxEQ_u9jF0hHA1G5g'
   }).addTo(mymap);
-  const marker = L.marker([51.5, -0.09]).addTo(mymap);
 }
 
-// async function dataHandler() {
-
-// }
-
 mapInit();
-async function windowActions() {
+
+/* data handler accepts form user input and outputs
+results in suggestion div */
+async function dataHandler() {
   const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
   const suggestions = document.querySelector('.suggestions');// suggestions div will contain query results
   data = [];
@@ -50,17 +53,29 @@ async function windowActions() {
   function displayMatches(event) {
     /* matchArray contains matches of this.value (current
             user_input) within data array */
-    const matchArray = findMatches(event.target.value, data);
-    console.log(matchArray);
+    let matchCount = 0;
+    const allMatches = findMatches(event.target.value, data);
+    const matchArray = [];
+    let viewCoordinate1;
+    let viewCoordinate2;
+
+    allMatches.forEach((element) => { /* matchArray contains matches containing coordinates */
+        if (matchCount < 5 && element.geocoded_column_1 !== undefined) {
+            matchArray[matchCount] = element;
+            matchCount++;
+            L.marker( [element.geocoded_column_1.coordinates[1], 
+                element.geocoded_column_1.coordinates[0]] ).addTo(mymap);/* set map markers */
+        }
+    });
+
+    viewCoordinate1 = matchArray[0].geocoded_column_1.coordinates[1];/* set coordinates of map */
+    viewCoordinate2 = matchArray[0].geocoded_column_1.coordinates[0];
+    mymap.setView([viewCoordinate1, viewCoordinate2], 13);/* set map view */
+    
     const html = matchArray.map((inspection) => // return list item elements for every index in matchArray
         `<li style="font-size:25px">
             <span class="name">${inspection.name}<br>
-                ${inspection.category}<br>
-            <em>
-                ${inspection.address_line_1}<br>
-                ${inspection.city},
-                <br>${inspection.zip}<br><br>
-            </em>
+                <em>${inspection.address_line_1}<br> 
             </span>
         </li>
             `).join(''); // convert array of matches to string
@@ -72,4 +87,4 @@ async function windowActions() {
   // displayMatches whenever user input changes
   searchInput.addEventListener('change', displayMatches);
 }
-window.onload = windowActions;
+window.onload = dataHandler;
